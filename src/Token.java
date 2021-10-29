@@ -47,9 +47,25 @@ public class Token {
 	// For now I'm throwing this all in one function, however it will need to be refactored
 	// Should all of the tokenType logic go in a separate class?
 	// NOT COMPLETE
-	public void setTokenTypeAndLength(String restOfLine) {
+	
+	/*
+	 * By end of function, tokenType, length, and lexeme should be defined and set for the Token object
+	 * 
+	 * To be handled: 
+	 * Letters (variables, reserved words) 
+	 * Brackets 
+	 * Parenthesis 
+	 * #(include statements), 
+	 * <, >, =, -, +, *, /, 
+	 * comments, 
+	 * whitespace
+	 * 
+	 * 
+	 * */
+	
+	public void setTokenAttributes(String restOfLine) {
 			int curr = 0;
-			if(Character.isLetter(lexeme.charAt(curr))) {
+			if(Character.isLetter(restOfLine.charAt(curr))) {
 				// if reserved, set reserved keyword type. else normal identifier
 				String lexeme = "";
 				for(int i = 0; i < restOfLine.length(); i++) {

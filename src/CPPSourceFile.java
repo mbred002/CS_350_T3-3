@@ -11,7 +11,7 @@ public class CPPSourceFile {
 		
 		
 		// probably shouldn't make these variables of CPPSourceFile
-		// as it's only used to interate through in tokenize(), need to refactor
+		// as it's only used to iterate through in tokenize(), need to refactor
 		this.lineNum = 1;
 		this.colNum = 0;
 	}
@@ -45,23 +45,20 @@ public class CPPSourceFile {
 		
 		String line = sc.nextLine();
 		while(this.colNum < line.length()) {
-			Token nextToken = getNextToken(line, lineNum, this.colNum);
+			Token nextToken = getNextToken(line, lineNum);
 			tS.pushToSequence(nextToken);
 		}
 		this.lineNum++;
 	}
 	
 	// iterate through all the tokens in a line
-	public Token getNextToken(String line, int lineNum, int colNum) {
-		Token newToken = new Token(lineNum, colNum);
+	public Token getNextToken(String line, int lineNum) {
+		Token newToken = new Token(lineNum, this.colNum);
 		
-		
-		while(line.charAt(colNum) != '\n') {
-			String restOfLine = line.substring(colNum, line.length());
-			newToken.setTokenTypeAndLength(restOfLine);
-			colNum += newToken.getLength();
-		}
-		
+		String restOfLine = line.substring(colNum, line.length());
+		newToken.setTokenAttributes(restOfLine);
+		this.colNum += newToken.getLength();
+
 		return newToken;
 	}
 

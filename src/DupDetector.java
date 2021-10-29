@@ -17,7 +17,7 @@ public static void main(String[] args) {
 		System.out.println(normalId.getLexeme());
 		System.out.println(normalId.getTokenType());
 		
-		CPPSourceFile cppFile = new CPPSourceFile("src/helloworld.cpp");
+		CPPSourceFile cppFile = new CPPSourceFile("CS_350_T3-3/src/helloworld.cpp");
 		
 		// just debugging here, outputting the input file
 		try {
