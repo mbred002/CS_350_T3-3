@@ -15,7 +15,7 @@ public class Token {
 	
 	public Token(String lexeme, int line, int col) {
 		this.lexeme = lexeme;
-		this.setTokenTypeAndLength(lexeme);
+		this.setTokenAttributes(lexeme);
 		this.line = line;
 		this.column = col;
 		this.length = lexeme.length();
@@ -65,30 +65,72 @@ public class Token {
 	
 	public void setTokenAttributes(String restOfLine) {
 			int curr = 0;
+			
+			// skip whitespace, to next Token
+			
 			if(Character.isLetter(restOfLine.charAt(curr))) {
-				// if reserved, set reserved keyword type. else normal identifier
 				String lexeme = "";
 				for(int i = 0; i < restOfLine.length(); i++) {
-					if(Character.isLetter(restOfLine.charAt(i)))
-					lexeme += restOfLine.charAt(i);
+					if(Character.isLetterOrDigit(restOfLine.charAt(i))) {
+						// if letter or digit, keep adding to the lexeme.
+						lexeme += restOfLine.charAt(i);
+					} else {
+						// if not a letter or digit, the lexeme is done, terminate loop
+						i = restOfLine.length();
+					}
+					
 				}
-				testIfReserved(lexeme); 
+				// if reserved, set reserved keyword type. else normal identifier
+				testIfReserved(lexeme);
+				this.setLength(lexeme.length());
+				this.setLexeme(lexeme);
 			} 
 			/*
 			 * Need an overarching function for all characters that
 			 * end a token to move to the next i.e {, }, (, ) instead of a bunch of else ifs
 			 * */
 			else if(restOfLine.charAt(curr) == '(') {
-				this.tokenType = "left-paren-op";
+				this.setTokenType("left-paren-op");
+				this.setLength(1);
+				this.setLexeme("(");
 			} else if (restOfLine.charAt(curr) == ')') {
-				this.tokenType = "right-paren-op";
-			} else if(restOfLine.charAt(curr) == '{') {
-				this.tokenType = "left-bracket-op";
-			} else if(restOfLine.charAt(curr) == '}') {
-				this.tokenType = "right-bracket-op";
+				this.setTokenType("right-paren-op");
+				this.setLength(1);
+				this.setLexeme(")");
+			} else if (restOfLine.charAt(curr) == '{') {
+				this.setTokenType("left-bracket-op");
+				this.setLength(1);
+				this.setLexeme("{");
+			} else if (restOfLine.charAt(curr) == '}') {
+				this.setTokenType("right-bracket-op");
+				this.setLength(1);
+				this.setLexeme("}");
+			} else if(restOfLine.charAt(curr) == '#') {
+				String lexeme = "";
+				while(restOfLine.charAt(curr) != '\n') {
+					lexeme += restOfLine.charAt(curr);
+					curr++;
+				}
+				this.setTokenType("preprocessor");
+				this.setLength(lexeme.length());
+				this.setLexeme(lexeme);
 			}
+			// to-do:
+			// +,-,*,/,",',comma,semicolon, [,],=,<,>,!, probably other things I'm forgetting
 			
 			
+	}
+	
+	public void setTokenType(String type) {
+		this.tokenType = type;
+	}
+	
+	public void setLength(int len) {
+		this.length = len;
+	}
+	
+	public void setLexeme(String lex) {
+		this.lexeme = lex;
 	}
 	
 	public void testIfReserved(String lexeme) {

@@ -9,6 +9,7 @@ public class CPPSourceFile {
 		File theFile = new File(cppFile);
 		this.filePath = theFile;
 		
+		// this.fileTokens = tokenize(); once tokenize is functional
 		
 		// probably shouldn't make these variables of CPPSourceFile
 		// as it's only used to iterate through in tokenize(), need to refactor
@@ -45,6 +46,9 @@ public class CPPSourceFile {
 		
 		String line = sc.nextLine();
 		while(this.colNum < line.length()) {
+			if(line.charAt(colNum) == ' ') {
+				this.colNum++;
+			}
 			Token nextToken = getNextToken(line, lineNum);
 			tS.pushToSequence(nextToken);
 		}
@@ -55,7 +59,7 @@ public class CPPSourceFile {
 	public Token getNextToken(String line, int lineNum) {
 		Token newToken = new Token(lineNum, this.colNum);
 		
-		String restOfLine = line.substring(colNum, line.length());
+		String restOfLine = line.substring(this.colNum, line.length());
 		newToken.setTokenAttributes(restOfLine);
 		this.colNum += newToken.getLength();
 
