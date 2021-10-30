@@ -60,7 +60,8 @@ public class CPPSourceFile {
 		Token newToken = new Token(lineNum, this.colNum);
 		
 		String restOfLine = line.substring(this.colNum, line.length());
-		newToken.setTokenAttributes(restOfLine);
+		newToken.determineTokenAttributes(restOfLine);
+		// newToken.setLocation(int lineNum, int colNum, File srcFile); -- to be impl.
 		this.colNum += newToken.getLength();
 
 		return newToken;
