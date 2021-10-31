@@ -76,7 +76,7 @@ public class Token {
 						// or if :, ie std::cout 
 						lexeme += restOfLine.charAt(i);
 					} else if(restOfLine.charAt(i) == ':') {
-						lexeme += restOfLine.
+						lexeme += restOfLine.charAt(i)
 					}
 					else {
 						// if not a letter or digit, the lexeme is done, terminate loop
@@ -135,7 +135,10 @@ public class Token {
 					this.setTokenAttributes("assignment-op", lexeme, 1);
 				}
 				
-			} else if (restOfLine.charAt(curr) == '\'' || restOfLine.charAt(curr) == '"') {
+			} else if(restOfLine.charAt(curr) == '/') {
+				// to be implemented
+			}
+			else if (restOfLine.charAt(curr) == '\'' || restOfLine.charAt(curr) == '"') {
 				// add opening quote of string ", or '
 				char quotationMark = restOfLine.charAt(curr);
 				String lexeme = Character.toString(quotationMark);

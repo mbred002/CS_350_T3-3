@@ -46,15 +46,63 @@ public class CPPSourceFile {
 		
 		String line = sc.nextLine();
 		while(this.colNum < line.length()) {
-			if(line.charAt(colNum) == ' ') {
+			if(Character.isWhitespace(line.charAt(colNum))) {
 				this.colNum++;
+			} else if (this.checkForComment(line, colNum)) {
+				this.skipComment(line, sc);
+				// logic for if a comment ends with code  remaining on the line to be implemented
+			} else {
+				Token nextToken = getNextToken(line, lineNum);
+				tS.pushToSequence(nextToken);
 			}
-			Token nextToken = getNextToken(line, lineNum);
-			tS.pushToSequence(nextToken);
+			
 		}
+		
 		this.lineNum++;
 	}
 	
+	public boolean checkForComment(String line, int colNum) {
+		if(line.charAt(colNum) == '/') {
+			if(line.charAt(colNum+1) == '*' || line.charAt(colNum) == '/') {
+				return true;
+			}
+		} else {
+			return false;
+		}
+		return false;
+	}
+	
+	public void skipComment(String line, Scanner sc) {
+		this.colNum++;
+		if(line.charAt(colNum) == '/') {
+			while(this.colNum < line.length()) {
+				this.colNum++;
+			}
+			
+		// implied else if char = *, for multi-line comments	
+		} else {
+			this.colNum++;
+			boolean endOfComment = false;
+			while(!endOfComment) {
+				while(this.colNum < line.length() || !endOfComment) {
+					if(line.substring(colNum, colNum+1) != "*/") {
+						this.colNum++;
+					} else {
+						this.colNum += 2;
+						endOfComment = true;
+					}
+				}
+				// end of the line is reached, or end of comment is reached
+				// if end of line is reached, and comment is not, execute this
+				if(!endOfComment) {
+					line = sc.nextLine();
+					this.lineNum++;
+				}
+			}
+		}
+	}
+
+
 	// iterate through all the tokens in a line
 	public Token getNextToken(String line, int lineNum) {
 		Token newToken = new Token(lineNum, this.colNum);
