@@ -13,7 +13,24 @@ public class TokenSequence {
 	
 	Token returnToken(int tokenIndex) {
 		return sequence.elementAt(tokenIndex);
+		
 	}
+	
+	//////// Count each token type /////////
+	
+	int CountTokenType(String TypeX){
+		
+		int i = 0, num = sequence.size();
+		
+		for (i =0; i < num; i++ );
+		{
+			if (sequence[i].getTokenType().equals(TypeX))
+			{
+				this.numTokens++;
+			}
+		}
+	};
+	
 	
 	
 	
@@ -21,3 +38,8 @@ public class TokenSequence {
 	CPPSourceFile sourceFile;
 	int numTokens;
 }
+
+
+
+
+
