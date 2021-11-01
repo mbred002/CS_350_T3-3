@@ -18,6 +18,16 @@ public static void main(String[] args) {
 		System.out.println(normalId.getTokenType());
 		
 		CPPSourceFile cppFile = new CPPSourceFile("CS_350_T3-3/src/helloworld.cpp");
+
+		//Output the C++ Source file found placeholder
+		System.out.print("Files scanned:\n");
+		System.out.print(cppFile.getFile() + ",\n");
+
+		//Output the size of the sequence vector?
+		//TokenSequence test = new TokenSequence();
+		//System.out.print(test.sequence.size());
+
+		
 		
 		// just debugging here, outputting the input file
 		try {
