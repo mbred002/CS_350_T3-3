@@ -7,6 +7,10 @@ public class Token {
 	private int column;
 	private int length;
 	// I don't believe a token needs to have an associated file, only sequences
+	public Token()
+	{
+		
+	}
 	
 	public Token(int line, int col) {
 		this.line = line;
