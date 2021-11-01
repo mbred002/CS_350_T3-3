@@ -62,6 +62,41 @@ public class Token {
 	 * 
 	 * 
 	 * */
+	public void determineToken(String restOfLine, int curr)
+	{
+		int count = 0;
+		
+		for (int i = 0; i<threeLetterTokenStrings.length; i++)
+		{
+			if(restOfLine.substring(curr, curr+2) == threeLetterTokenStrings[i])
+			{
+				this.setTokenAttributes(tokenNames[threeLetterTokenNameIndexes[count]], threeLetterTokenStrings[count], 3);
+				break;
+			}
+			count++;	
+		}
+		
+		count = 0;
+		for (int j = 0; j<twoLetterTokenStrings.length; j++)
+		{
+			if(restOfLine.substring(curr, curr+1) == twoLetterTokenStrings[j])
+			{
+				this.setTokenAttributes(tokenNames[twoLetterTokenNameIndexes[count]], twoLetterTokenStrings[count], 2);
+				break;
+			}
+			count++;
+		}
+		count = 0;
+		for (int k = 0; k<tokenChars.length;k++)
+		{
+			if(restOfLine.charAt(curr) == tokenChars[k])
+			{
+				this.setTokenAttributes(tokenNames[oneLetterTokenNameIndexes[count]], Character.toString(tokenChars[count]), 1);
+				break;
+			}
+			count++;
+		}
+	}
 	
 	public void determineTokenAttributes(String restOfLine) {
 			int curr = 0;
@@ -76,7 +111,7 @@ public class Token {
 						// or if :, ie std::cout 
 						lexeme += restOfLine.charAt(i);
 					} else if(restOfLine.charAt(i) == ':') {
-						lexeme += restOfLine.
+						lexeme += restOfLine.charAt(i);
 					}
 					else {
 						// if not a letter or digit, the lexeme is done, terminate loop
@@ -93,6 +128,7 @@ public class Token {
 			 * Need an overarching function for all characters that
 			 * end a token to move to the next i.e {, }, (, ) instead of a bunch of else ifs
 			 * */
+			/*
 			else if(restOfLine.charAt(curr) == '(') {
 				this.setTokenAttributes("left-paren-op", "(", 1);
 			} else if (restOfLine.charAt(curr) == ')') {
@@ -135,7 +171,9 @@ public class Token {
 					this.setTokenAttributes("assignment-op", lexeme, 1);
 				}
 				
-			} else if (restOfLine.charAt(curr) == '\'' || restOfLine.charAt(curr) == '"') {
+			} 
+			*/
+			else if (restOfLine.charAt(curr) == '\'' || restOfLine.charAt(curr) == '"') {
 				// add opening quote of string ", or '
 				char quotationMark = restOfLine.charAt(curr);
 				String lexeme = Character.toString(quotationMark);
@@ -147,6 +185,9 @@ public class Token {
 				// add closing quotation mark, "str", or 'c'
 				lexeme += quotationMark;
 				this.setTokenAttributes("string", lexeme, lexeme.length());
+			}
+			else {
+				determineToken(restOfLine, curr);
 			}
 			// to-do:
 			// *,/,comma,semicolon,[,],<,>,!,dot,&,|,?,^,%, numeric literals
@@ -192,6 +233,37 @@ public class Token {
             "return", "short", "static", "strictfp", "super", "switch",
             "synchronized", "this", "throw", "throws", "transient", "true",
             "try", "void", "volatile", "while" 
+	};
+	
+	private String[] tokenNames = {
+			"left-paren-op", "right-paren-op", "left-bracket-op", "right-bracket-op", "preprocessor-op",
+			"plus-eq-op","inc-op", "plus-op", "minus-eq-op", "dec-op", "access-op", "minus-op", "set-equal-op", "assignment-op", 
+			"mult-eq-op","mult-op","divide-op","divide-eq-op", "comma-op", "term-op","left-sq-bracket-op", "right-sq-bracket-op", "less-eq-op",
+			"shift-bit-left-op", "shift-bit-left-eq-op", "less-op", "greater-eq-op","shift-bit-right-op", "shift-bit-right-eq-op", "greater-op","not-equal-op",
+			"not-op", "dot-op", "ref-op", "and-op", "and-eq-op", "or-op", "disjunction-op", "conditional-op",
+			"exclusive-or-op", "exclusive-or-eq-op", "mod-equal-op", "mod-op", "dot-point-op", "arrow-point-op"
+	};
+	private int[] oneLetterTokenNameIndexes = {
+			1,2,3,4,5,8,12,14,16,17,19,20,21,22,26,30,32,33,34,37,40,43
+	};
+	private int[] twoLetterTokenNameIndexes  ={
+			5,6,8,9,10,12,14,17,22,23,26,27,30,32,33,35
+	};
+	private int[] threeLetterTokenNameIndexes =
+		{
+			24,28,36
+		};
+	private char[] tokenChars = {
+			'(',')','{', '}', '#', '+', 
+			'-', '=', '*', '/', ',', ';', '[', 
+			']','<','>','!','.',
+			'&','|','^','%'
+	};
+	private String[] twoLetterTokenStrings = {
+		"+=", "++", "-=", "--", "->", "==", "*=", "/=", "<=", "<<", ">=", ">>", "!=", "&&", "&=", "||", "?:", "^=", "%=", ".*"
+	};
+	private String[] threeLetterTokenStrings = {
+		"<<=", ">>=", "->*"
 	};
 	
 	List<String> keywordList = Arrays.asList(keywords);
