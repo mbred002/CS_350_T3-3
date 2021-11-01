@@ -173,6 +173,9 @@ public class Token {
 				
 			} 
 			*/
+			else if (restOfLine.charAt(curr) == '/') {
+				//to be implemented
+			}
 			else if (restOfLine.charAt(curr) == '\'' || restOfLine.charAt(curr) == '"') {
 				// add opening quote of string ", or '
 				char quotationMark = restOfLine.charAt(curr);
