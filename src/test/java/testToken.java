@@ -10,7 +10,7 @@ public class testToken
 	public void testDetermineToken()
 	{
 		Token a = new Token();
-		String restOfLine = "==";
+		String restOfLine = "== integer";
 		int curr = 0;
 		a.determineToken(restOfLine, curr);
 		assertFalse(a.getLexeme().isEmpty());

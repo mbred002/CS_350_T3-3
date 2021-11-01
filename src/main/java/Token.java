@@ -244,27 +244,31 @@ public class Token {
 	
 	private String[] tokenNames = {
 			"left-paren-op", "right-paren-op", "left-bracket-op", "right-bracket-op", "preprocessor-op",
-			"plus-eq-op","inc-op", "plus-op", "minus-eq-op", "dec-op", "access-op", "minus-op", "set-equal-op", "assignment-op", 
-			"mult-eq-op","mult-op","divide-op","divide-eq-op", "comma-op", "term-op","left-sq-bracket-op", "right-sq-bracket-op", "less-eq-op",
-			"shift-bit-left-op", "shift-bit-left-eq-op", "less-op", "greater-eq-op","shift-bit-right-op", "shift-bit-right-eq-op", "greater-op","not-equal-op",
-			"not-op", "dot-op", "ref-op", "and-op", "and-eq-op", "or-op", "disjunction-op", "conditional-op",
-			"exclusive-or-op", "exclusive-or-eq-op", "mod-equal-op", "mod-op", "dot-point-op", "arrow-point-op"
+			"plus-eq-op","inc-op", "plus-op", "minus-eq-op", "dec-op",
+			"access-op", "minus-op", "set-equal-op", "assignment-op","mult-eq-op",
+			"mult-op","divide-op","divide-eq-op", "comma-op", "term-op",
+			"left-sq-bracket-op", "right-sq-bracket-op", "less-eq-op","shift-bit-left-op", "shift-bit-left-eq-op",
+			"less-op", "greater-eq-op","shift-bit-right-op", "shift-bit-right-eq-op", "greater-op",
+			"not-equal-op","not-op", "dot-op", "ref-op", "and-op",
+			"and-eq-op", "or-op", "disjunction-op", "conditional-op","exclusive-or-op",
+			"exclusive-or-eq-op", "mod-equal-op", "mod-op", "dot-point-op", "arrow-point-op"
 	};
 	private int[] oneLetterTokenNameIndexes = {
-			1,2,3,4,5,8,12,14,16,17,19,20,21,22,26,30,32,33,34,37,40,43
+			0,1,2,3,4,7,11,12,15,16,18,19,20,21,25,29,31,32,33,36,39,42
 	};
 	private int[] twoLetterTokenNameIndexes  ={
-			5,6,8,9,10,12,14,17,22,23,26,27,30,32,33,35
+			5,6,8,9,10,13,14,17,22,23,26,27,30,34,35,37,38,40,41,43
 	};
 	private int[] threeLetterTokenNameIndexes =
 		{
-			24,28,36
+			24,28,44
 		};
 	private char[] tokenChars = {
-			'(',')','{', '}', '#', '+', 
-			'-', '=', '*', '/', ',', ';', '[', 
-			']','<','>','!','.',
-			'&','|','^','%'
+			'(',')','{', '}', '#',
+			'+','-', '=', '*', '/',
+			',', ';', '[', ']','<',
+			'>','!','.','&','|',
+			'^','%'
 	};
 	private String[] twoLetterTokenStrings = {
 		"+=", "++", "-=", "--", "->", "==", "*=", "/=", "<=", "<<", ">=", ">>", "!=", "&&", "&=", "||", "?:", "^=", "%=", ".*"
