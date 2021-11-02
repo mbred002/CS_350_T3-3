@@ -18,10 +18,12 @@ public static void main(String[] args) {
 		System.out.println(normalId.getTokenType());
 		
 		CPPSourceFile cppFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
+		TokenSequence tSequence = cppFile.tokenize();
 
 		//Output the C++ Source file found placeholder
 		System.out.print("Files scanned:\n");
 		System.out.print(cppFile.getFile() + ",\n");
+		System.out.println(tSequence.getNumTokens());
 
 		//Output the size of the sequence vector?
 		//TokenSequence test = new TokenSequence();
@@ -36,7 +38,7 @@ public static void main(String[] args) {
 		System.out.println(a.getLength());
 		System.out.println(a.getTokenType());
 		
-		/*
+		
 		// just debugging here, outputting the input file
 		try {
 			Scanner fileScanner = new Scanner(cppFile.getFile());
@@ -47,7 +49,7 @@ public static void main(String[] args) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		
 	}
 }

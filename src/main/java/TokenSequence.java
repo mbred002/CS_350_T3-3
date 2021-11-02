@@ -3,12 +3,15 @@ import java.util.Vector;
 public class TokenSequence {
 	
 	TokenSequence() {
-		this.sourceFile = new CPPSourceFile("helloworld.cpp");
+		this.sourceFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
 		this.numTokens = 0;
+		
+		this.sequence = new Vector<Token>();
 	}
 	
 	void pushToSequence(Token token) {
-		sequence.add(token);
+		this.sequence.add(token);
+		this.numTokens++;
 	}
 	
 	Token returnToken(int tokenIndex) {
@@ -18,7 +21,11 @@ public class TokenSequence {
 	
 	//////// Count each token type /////////
 	
-	int CountTokenType(String TypeX){
+	public int getNumTokens() {
+		return numTokens;
+	}
+	
+	public int CountTokenType(String TypeX){
 		
 		int i = 0, num = sequence.size();
 		int count =0;

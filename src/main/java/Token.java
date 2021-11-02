@@ -71,37 +71,46 @@ public class Token {
 	{
 		int count = 0;
 		
-		for (int i = 0; i<threeLetterTokenStrings.length; i++)
-		{
-			if(restOfLine.substring(curr, curr+3) == threeLetterTokenStrings[i])
+		if(restOfLine.length() >= 3) {
+			for (int i = 0; i<threeLetterTokenStrings.length; i++)
 			{
-				this.setTokenAttributes(tokenNames[threeLetterTokenNameIndexes[count]], threeLetterTokenStrings[count], 3);
-				return;
+				if(restOfLine.substring(curr, curr+3).equals(threeLetterTokenStrings[i]))
+				{
+					this.setTokenAttributes(tokenNames[threeLetterTokenNameIndexes[count]], threeLetterTokenStrings[count], 3);
+					return;
+				}
+				count++;	
 			}
-			count++;	
+		}
+		
+		
+		count = 0;
+		
+		if(restOfLine.length() >= 2) {
+			for (int j = 0; j<twoLetterTokenStrings.length; j++)
+			{
+				
+				if(restOfLine.substring(curr, curr+2).equals(twoLetterTokenStrings[j]))
+				{
+					this.setTokenAttributes(tokenNames[twoLetterTokenNameIndexes[count]], twoLetterTokenStrings[count], 2);
+					return;
+				}
+				count++;
+			}
 		}
 		
 		count = 0;
-		for (int j = 0; j<twoLetterTokenStrings.length; j++)
-		{
-			
-			if(restOfLine.substring(curr, curr+2).equals(twoLetterTokenStrings[j]))
+		
+		if(restOfLine.length() >= 1) {
+			for (int k = 0; k<tokenChars.length;k++)
 			{
-				this.setTokenAttributes(tokenNames[twoLetterTokenNameIndexes[count]], twoLetterTokenStrings[count], 2);
-				System.out.println(j);
-				return;
+				if(restOfLine.charAt(curr) == tokenChars[k])
+				{
+					this.setTokenAttributes(tokenNames[oneLetterTokenNameIndexes[count]], Character.toString(tokenChars[count]), 1);
+					return;
+				}
+				count++;
 			}
-			count++;
-		}
-		count = 0;
-		for (int k = 0; k<tokenChars.length;k++)
-		{
-			if(restOfLine.charAt(curr) == tokenChars[k])
-			{
-				this.setTokenAttributes(tokenNames[oneLetterTokenNameIndexes[count]], Character.toString(tokenChars[count]), 1);
-				return;
-			}
-			count++;
 		}
 		
 	}
@@ -131,6 +140,14 @@ public class Token {
 				testIfReserved(lexeme);
 				this.setLength(lexeme.length());
 				this.setLexeme(lexeme);
+			} else if(restOfLine.charAt(curr) == '#') {
+				String lexeme = "";
+				while(restOfLine.length() != curr) {
+					lexeme += restOfLine.charAt(curr);
+					curr++;
+				}
+				this.setTokenAttributes("preprocessor-op", lexeme, lexeme.length());
+				
 			} 
 			/*
 			 * Need an overarching function for all characters that
@@ -181,8 +198,16 @@ public class Token {
 				
 			} 
 			*/
-			else if (restOfLine.charAt(curr) == '/') {
-				//to be implemented
+			else if(Character.isDigit(restOfLine.charAt(curr))) {
+				String lexeme = "";
+				for(int i = 0; i < restOfLine.length(); i++) {
+					if(Character.isDigit(restOfLine.charAt(i))) {
+						lexeme += restOfLine.charAt(i);
+					} else {
+						i = restOfLine.length();
+					}
+				}
+				this.setTokenAttributes("numeric-literal", lexeme, lexeme.length());
 			}
 			else if (restOfLine.charAt(curr) == '\'' || restOfLine.charAt(curr) == '"') {
 				// add opening quote of string ", or '
@@ -192,6 +217,7 @@ public class Token {
 				while(restOfLine.charAt(curr) != quotationMark) {
 					// add contents of string "str, or 'c
 					lexeme += restOfLine.charAt(curr);
+					curr++;
 				}
 				// add closing quotation mark, "str", or 'c'
 				lexeme += quotationMark;

@@ -41,10 +41,15 @@ public class CPPSourceFile {
 		return this.filePath;
 	}
 	
+	public TokenSequence getTokenSequence() {
+		return this.fileTokens;
+	}
+	
 	// way to iterate through each line in the file used in a loop in tokenize
 	public void getNextLine(int lineNum, Scanner sc, TokenSequence tS) {
 		
 		String line = sc.nextLine();
+		this.colNum = 0;
 		while(this.colNum < line.length()) {
 			if(Character.isWhitespace(line.charAt(colNum))) {
 				this.colNum++;
