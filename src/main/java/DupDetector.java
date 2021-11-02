@@ -17,7 +17,7 @@ public static void main(String[] args) {
 		System.out.println(normalId.getLexeme());
 		System.out.println(normalId.getTokenType());
 		
-		CPPSourceFile cppFile = new CPPSourceFile("CS_350_T3-3/src/helloworld.cpp");
+		CPPSourceFile cppFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
 
 		//Output the C++ Source file found placeholder
 		System.out.print("Files scanned:\n");
