@@ -9,7 +9,7 @@ public class testToken
 	@Test
 	public void testDetermineToken()
 	{
-		Token a = new Token();
+		Token a = new Token(0, 0);
 		String restOfLine = "== integer";
 		int curr = 0;
 		a.determineToken(restOfLine, curr);

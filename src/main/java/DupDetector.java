@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class DupDetector {
 public static void main(String[] args) {
 		
-
+		
 		System.out.println("Hello world");
 		
 		// outputting reserved word
