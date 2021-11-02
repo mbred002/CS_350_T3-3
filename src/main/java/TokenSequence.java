@@ -16,7 +16,12 @@ public class TokenSequence {
 	
 	Token returnToken(int tokenIndex) {
 		return sequence.elementAt(tokenIndex);
-		
+	}
+	
+	public void outputAllTokens() {
+		for(int i = 0; i < this.sequence.size(); i++) {
+			System.out.println(sequence.get(i).getLexeme());
+		}
 	}
 	
 	//////// Count each token type /////////
