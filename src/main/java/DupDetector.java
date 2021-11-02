@@ -27,8 +27,16 @@ public static void main(String[] args) {
 		//TokenSequence test = new TokenSequence();
 		//System.out.print(test.sequence.size());
 
+		Token a = new Token(0, 0);
+		String restOfLine = "== integer";
+		System.out.println(restOfLine.substring(0, 2));
+		int curr = 0;
+		a.determineToken(restOfLine, curr);
+		System.out.println(a.getLexeme());
+		System.out.println(a.getLength());
+		System.out.println(a.getTokenType());
 		
-		
+		/*
 		// just debugging here, outputting the input file
 		try {
 			Scanner fileScanner = new Scanner(cppFile.getFile());
@@ -39,6 +47,7 @@ public static void main(String[] args) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
 	}
 }

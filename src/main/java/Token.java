@@ -37,6 +37,7 @@ public class Token {
 		return this.length;
 	}
 	
+	
 	/*
 	 * Need boolean checks for if first character of the lexeme is:
 	 * A letter
@@ -72,10 +73,10 @@ public class Token {
 		
 		for (int i = 0; i<threeLetterTokenStrings.length; i++)
 		{
-			if(restOfLine.substring(curr, curr+2) == threeLetterTokenStrings[i])
+			if(restOfLine.substring(curr, curr+3) == threeLetterTokenStrings[i])
 			{
 				this.setTokenAttributes(tokenNames[threeLetterTokenNameIndexes[count]], threeLetterTokenStrings[count], 3);
-				break;
+				return;
 			}
 			count++;	
 		}
@@ -83,10 +84,12 @@ public class Token {
 		count = 0;
 		for (int j = 0; j<twoLetterTokenStrings.length; j++)
 		{
-			if(restOfLine.substring(curr, curr+1) == twoLetterTokenStrings[j])
+			
+			if(restOfLine.substring(curr, curr+2).equals(twoLetterTokenStrings[j]))
 			{
 				this.setTokenAttributes(tokenNames[twoLetterTokenNameIndexes[count]], twoLetterTokenStrings[count], 2);
-				break;
+				System.out.println(j);
+				return;
 			}
 			count++;
 		}
@@ -96,10 +99,11 @@ public class Token {
 			if(restOfLine.charAt(curr) == tokenChars[k])
 			{
 				this.setTokenAttributes(tokenNames[oneLetterTokenNameIndexes[count]], Character.toString(tokenChars[count]), 1);
-				break;
+				return;
 			}
 			count++;
 		}
+		
 	}
 	
 	public void determineTokenAttributes(String restOfLine) {
@@ -260,10 +264,10 @@ public class Token {
 			"exclusive-or-eq-op", "mod-equal-op", "mod-op", "dot-point-op", "arrow-point-op"
 	};
 	private int[] oneLetterTokenNameIndexes = {
-			0,1,2,3,4,7,11,12,15,16,18,19,20,21,25,29,31,32,33,36,39,42
+			0,1,2,3,4,7,11,13,15,16,18,19,20,21,25,29,31,32,33,36,39,42
 	};
 	private int[] twoLetterTokenNameIndexes  ={
-			5,6,8,9,10,13,14,17,22,23,26,27,30,34,35,37,38,40,41,43
+			5,6,8,9,10,12,14,17,22,23,26,27,30,34,35,37,38,40,41,43
 	};
 	private int[] threeLetterTokenNameIndexes =
 		{
