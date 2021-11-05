@@ -21,4 +21,16 @@ public class testToken
 		
 	}
 	
+	@Test
+	public void testDetermineTokenAttributes()
+	{
+		
+	}
+	
+	@Test
+	public void testSetTokenAttributes()
+	{
+		
+	}
+	
 	}
