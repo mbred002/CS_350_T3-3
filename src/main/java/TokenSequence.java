@@ -27,7 +27,7 @@ public class TokenSequence {
 	//////// Count each token type /////////
 	
 	public int getNumTokens() {
-		return numTokens;
+		return sequence.size();
 	}
 	
 	public int CountTokenType(String TypeX){
@@ -43,9 +43,36 @@ public class TokenSequence {
 			}
 		}
 		return count;
-	};
+	}
 	
+	public Token getToken(int index)
+	{
+		return sequence.get(index);
+	}
 	
+	public boolean isEqual (TokenSequence a)
+	{
+		boolean b = true;
+		//or less than minSequenceLength
+		if (this.sequence.size() != a.getNumTokens())
+		{
+			b = false;
+		}
+		else
+		{
+			for (int i = 0; i < this.sequence.size(); i++)
+			{
+				if(this.getToken(i).isEqual(a.getToken(i)))
+					b = true;
+				else
+				{
+					b = false;
+					break;
+				}
+			}	
+		}
+		return b;
+	}
 	
 	
 	Vector<Token> sequence;

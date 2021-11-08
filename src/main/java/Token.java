@@ -259,6 +259,18 @@ public class Token {
 		}
 	}
 	
+	public boolean isEqual(Token a)
+	{
+		boolean b = true;
+		if (this.getLexeme().equals(a.getLexeme()) && this.getTokenType().equals(a.getTokenType()) && this.getLength() == a.getLength())
+			b= true;
+		else
+			b = false;
+		
+		
+		return b;
+	}
+	
 	
 	private String[] keywords  = {
 			"alignas", "alignof", "and",
