@@ -54,7 +54,11 @@ public class CPPSourceFile {
 			if(Character.isWhitespace(line.charAt(colNum))) {
 				this.colNum++;
 			} else if (this.checkForComment(line, colNum)) {
+				// discard comment, move on to the next line, reset colNum to start of line
 				this.skipComment(line, sc);
+				line = sc.nextLine();
+				this.lineNum++;
+				this.colNum = 0;
 				// logic for if a comment ends with code  remaining on the line to be implemented
 			} else {
 				Token nextToken = getNextToken(line, lineNum);
@@ -89,12 +93,17 @@ public class CPPSourceFile {
 			this.colNum++;
 			boolean endOfComment = false;
 			while(!endOfComment) {
-				while(this.colNum < line.length() || !endOfComment) {
-					if(line.substring(colNum, colNum+1) != "*/") {
-						this.colNum++;
+				while(this.colNum < line.length() && !endOfComment) {
+					
+					if(line.charAt(colNum) == '*') {
+						if(line.charAt(colNum+1) == '/') {
+							this.colNum += 2;
+							endOfComment = true;
+						} else {
+							this.colNum++;;
+						}
 					} else {
-						this.colNum += 2;
-						endOfComment = true;
+						this.colNum++;
 					}
 				}
 				// end of the line is reached, or end of comment is reached
@@ -102,9 +111,14 @@ public class CPPSourceFile {
 				if(!endOfComment) {
 					line = sc.nextLine();
 					this.lineNum++;
+					this.colNum = 0;
 				}
 			}
 		}
+	}
+	
+	public int getNumLines() {
+		return this.lineNum;
 	}
 
 

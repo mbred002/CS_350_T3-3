@@ -22,6 +22,7 @@ public static void main(String[] args) {
 		System.out.print(cppFile.getFile() + ",\n");
 		tSequence.outputAllTokens();
 		System.out.println("Number of tokens: " + tSequence.getNumTokens());
+		System.out.println("Number of lines: " + cppFile.getNumLines());
 
 		//Output the size of the sequence vector?
 		//TokenSequence test = new TokenSequence();

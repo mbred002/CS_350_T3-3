@@ -149,55 +149,6 @@ public class Token {
 				this.setTokenAttributes("preprocessor-op", lexeme, lexeme.length());
 				
 			} 
-			/*
-			 * Need an overarching function for all characters that
-			 * end a token to move to the next i.e {, }, (, ) instead of a bunch of else ifs
-			 * */
-			/*
-			else if(restOfLine.charAt(curr) == '(') {
-				this.setTokenAttributes("left-paren-op", "(", 1);
-			} else if (restOfLine.charAt(curr) == ')') {
-				this.setTokenAttributes("right-paren-op", ")", 1);
-			} else if (restOfLine.charAt(curr) == '{') {
-				this.setTokenAttributes("left-bracket-op", "{", 1);
-			} else if (restOfLine.charAt(curr) == '}') {
-				this.setTokenAttributes("right-bracket-op", "}", 1);
-			} else if(restOfLine.charAt(curr) == '#') {
-				String lexeme = "";
-				while(restOfLine.charAt(curr) != '\n') {
-					lexeme += restOfLine.charAt(curr);
-					curr++;
-				}
-				this.setTokenAttributes("preprocessor-op", lexeme, lexeme.length());
-			} else if(restOfLine.charAt(curr) == '+') {
-				String lexeme = "+";
-				// every plus op, check if there is an equals sign following it
-				if(restOfLine.charAt(curr+1) == '=') {
-					lexeme += '=';
-					this.setTokenAttributes("plus-eq-op", lexeme, 2);
-				} else {
-					this.setTokenAttributes("plus-op", lexeme, 1);
-				}
-			} else if(restOfLine.charAt(curr) == '-') {
-				String lexeme = "+";
-				// same check as last, only w/ minus-equals
-				if(restOfLine.charAt(curr+1) == '=') {
-					lexeme += '=';
-					this.setTokenAttributes("minus-eq-op", lexeme, 2);
-				} else {
-					this.setTokenAttributes("minus-op", lexeme, 1);
-				}
-			} else if(restOfLine.charAt(curr) == '=') {
-				String lexeme = "=";
-				if(restOfLine.charAt(curr+1) == '=') {
-					lexeme += '=';
-					this.setTokenAttributes("set-equal-op", lexeme, 2);
-				} else {
-					this.setTokenAttributes("assignment-op", lexeme, 1);
-				}
-				
-			} 
-			*/
 			else if(Character.isDigit(restOfLine.charAt(curr))) {
 				String lexeme = "";
 				for(int i = 0; i < restOfLine.length(); i++) {
