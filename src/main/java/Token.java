@@ -244,7 +244,7 @@ public class Token {
 	private String[] tokenNames = {
 			"left-paren-op", "right-paren-op", "left-bracket-op", "right-bracket-op", "preprocessor-op",
 			"plus-eq-op","inc-op", "plus-op", "minus-eq-op", "dec-op",
-			"access-op", "minus-op", "set-equal-op", "assignment-op","mult-eq-op",
+			"access-op", "minus-op", "check-equal-op", "assignment-op","mult-eq-op",
 			"mult-op","divide-op","divide-eq-op", "comma-op", "term-op",
 			"left-sq-bracket-op", "right-sq-bracket-op", "less-eq-op","shift-bit-left-op", "shift-bit-left-eq-op",
 			"less-op", "greater-eq-op","shift-bit-right-op", "shift-bit-right-eq-op", "greater-op",
