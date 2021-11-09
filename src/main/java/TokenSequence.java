@@ -1,11 +1,17 @@
 import java.util.Vector;
+import java.io.File;
 
 public class TokenSequence {
 	
 	TokenSequence() {
 		this.sourceFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
 		this.numTokens = 0;
-		
+		this.sequence = new Vector<Token>();
+	}
+	
+	TokenSequence(CPPSourceFile file) {
+		this.sourceFile = file;
+		this.numTokens = 0;
 		this.sequence = new Vector<Token>();
 	}
 	
@@ -24,25 +30,9 @@ public class TokenSequence {
 		}
 	}
 	
-	//////// Count each token type /////////
 	
 	public int getNumTokens() {
 		return sequence.size();
-	}
-	
-	public int CountTokenType(String TypeX){
-		
-		int i = 0, num = sequence.size();
-		int count =0;
-		for (i =0; i < num; i++ );
-		{
-			if (sequence.get(i).getTokenType().equals(TypeX))
-			{
-				this.numTokens++;
-				count++;
-			}
-		}
-		return count;
 	}
 	
 	public Token getToken(int index)

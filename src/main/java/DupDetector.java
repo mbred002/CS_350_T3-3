@@ -16,6 +16,8 @@ public static void main(String[] args) {
 		
 		CPPSourceFile cppFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
 		TokenSequence tSequence = cppFile.tokenize();
+		System.out.println(cppFile.getFile());
+		
 
 		//Output the C++ Source file found placeholder
 		System.out.print("Files scanned:\n");

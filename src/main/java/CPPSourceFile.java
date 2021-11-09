@@ -20,7 +20,7 @@ public class CPPSourceFile {
 	
 	// loop through all of the input in the file
 	public TokenSequence tokenize() {
-		TokenSequence tSequence = new TokenSequence();
+		TokenSequence tSequence = new TokenSequence(this);
 		try {
 			Scanner sc = new Scanner(filePath);
 			// while file has another line, continue
@@ -31,8 +31,7 @@ public class CPPSourceFile {
 			// mandatory error handling
 			e.printStackTrace();
 		}
-		
-		// Placeholder until complete and can return a TokenSequence
+	
 		
 		return tSequence;
 	}
