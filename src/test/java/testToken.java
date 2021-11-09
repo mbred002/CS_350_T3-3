@@ -24,6 +24,28 @@ public class testToken
 	@Test
 	public void testDetermineTokenAttributes()
 	{
+		// String handling
+		String str = "\"This is a string\";";
+		Token b = new Token(10, 5);
+		b.determineTokenAttributes(str);
+		assertEquals(b.getLexeme(), "\"This is a string\"");
+		assertEquals(b.getTokenType(), "string");
+		assertEquals(b.getLength(), 18);
+		
+		// Identifier and reserved word handling
+		String reserved = "for(int i =";
+		Token c = new Token(2, 3);
+		c.determineTokenAttributes(reserved);
+		assertEquals(c.getLexeme(), "for");
+		assertEquals(c.getTokenType(), "Reserved keyword");
+		assertEquals(c.getLength(), 3);
+		
+		String identifier = "std::getline(std::cin, name);";
+		Token d = new Token(3, 4);
+		d.determineTokenAttributes(identifier);
+		assertEquals(d.getLexeme(), "std::getline");
+		assertEquals(d.getTokenType(), "Identifier");
+		assertEquals(d.getLength(), 12);
 		
 	}
 	
