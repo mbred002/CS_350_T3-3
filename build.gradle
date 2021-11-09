@@ -1,6 +1,7 @@
 plugins {
    id 'java'
    id 'application'
+   id 'eclipse'
 }
 
 mainClassName = 'DupDetector'
@@ -22,4 +23,7 @@ dependencies {
 test {  
     ignoreFailures = true
     useJUnitPlatform()
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
 }
