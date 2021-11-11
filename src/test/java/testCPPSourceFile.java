@@ -27,7 +27,6 @@ public class testCPPSourceFile {
 		
 	}
 	
-	// Not sure if this needs to be tested, as it is technically tested in testGetNextLine()
 	@Test
 	public void testGetNextToken()
 	{
@@ -35,8 +34,8 @@ public class testCPPSourceFile {
 		try {
 			Scanner scan = new Scanner(testFile.getFile());
 			String testStr = scan.nextLine();
-			
-			Token nextToken = testFile.getNextToken(testStr, testFile.getLineNum());
+
+			Token nextToken = testFile.getNextToken(testStr, 1, 0);
 			
 			assertTrue(nextToken.getLexeme().equals("#include<iostream>"));
 			assertTrue(nextToken.getTokenType().equals("preprocessor-op"));

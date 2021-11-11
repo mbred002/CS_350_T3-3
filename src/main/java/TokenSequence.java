@@ -3,6 +3,8 @@ import java.io.File;
 
 public class TokenSequence {
 	
+	// ----- Constructors
+	
 	TokenSequence() {
 		this.sourceFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
 		this.numTokens = 0;
@@ -15,47 +17,27 @@ public class TokenSequence {
 		this.sequence = new Vector<Token>();
 	}
 	
+	// ----- Manipulators
+	
 	void pushToSequence(Token token) {
 		this.sequence.add(token);
 		this.numTokens++;
 	}
 	
-	Token returnToken(int tokenIndex) {
-		return sequence.elementAt(tokenIndex);
-	}
+	// ----- Booleans
 	
-	public void outputAllTokens() {
-		for(int i = 0; i < this.sequence.size(); i++) {
-			System.out.println(sequence.get(i).getLexeme());
-		}
-	}
-	
-	
-	public int getNumTokens() {
-		return sequence.size();
-	}
-	
-	public Token getToken(int index)
-	{
-		return sequence.get(index);
-	}
-	
-	public boolean isEqual (TokenSequence a)
-	{
+	public boolean isEqual (TokenSequence a) {
 		boolean b = true;
 		//or less than minSequenceLength
-		if (this.sequence.size() != a.getNumTokens())
-		{
+		if (this.sequence.size() != a.getNumTokens()) {
 			b = false;
 		}
-		else
-		{
-			for (int i = 0; i < this.sequence.size(); i++)
-			{
-				if(this.getToken(i).isEqual(a.getToken(i)))
+		else {
+			for (int i = 0; i < this.sequence.size(); i++) {
+				if(this.getToken(i).isEqual(a.getToken(i))) {
 					b = true;
-				else
-				{
+				}
+				else {
 					b = false;
 					break;
 				}
@@ -64,6 +46,33 @@ public class TokenSequence {
 		return b;
 	}
 	
+	// ----- Output
+	
+	public void outputAllTokens() {
+		for(int i = 0; i < this.sequence.size(); i++) {
+			System.out.println(sequence.get(i).getLexeme());
+		}
+	}
+	
+	// ----- Getters
+	
+	public Vector<Token> getSequence() {
+		return this.sequence;
+	}
+	
+	public Token getToken(int index) {
+		return sequence.get(index);
+	}
+	
+	public CPPSourceFile getSourceFile() {
+		return this.sourceFile;
+	}
+
+	public int getNumTokens() {
+		return this.numTokens;
+	}
+	
+	// ----- Private data members
 	
 	Vector<Token> sequence;
 	CPPSourceFile sourceFile;

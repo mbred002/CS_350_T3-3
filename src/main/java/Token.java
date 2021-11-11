@@ -1,16 +1,7 @@
 import java.util.*;
 
-public class Token {
-	private String lexeme;
-	private String tokenType;
-	private int line;
-	private int column;
-	private int length;
-	// I don't believe a token needs to have an associated file, only sequences
-	public Token()
-	{
-		
-	}
+public class Token {	
+	// ---- Constructors
 	
 	public Token(int line, int col) {
 		this.line = line;
@@ -25,108 +16,12 @@ public class Token {
 		this.length = lexeme.length();
 	}
 	
-	public String getTokenType() {
-		return this.tokenType;
-	}
+	// ----- Determine Token Attributes
 	
-	public String getLexeme() {
-		return this.lexeme;
-	}
-	
-	public int getLength() {
-		return this.length;
-	}
-	
-	public int getColumn() {
-		return this.column;
-	}
-	
-	public int getLineNum() {
-		return this.line;
-	}
-	
-	
-	/*
-	 * Need boolean checks for if first character of the lexeme is:
-	 * A letter
-	 * A digit
-	 * Whitespace
-	 * An operator, and the appropriate logic for each operator to proceed
-	 * A comment, in which case it is ignored
-	 * 
-	 * */
-	
-	
-	// For now I'm throwing this all in one function, however it will need to be refactored
-	// Should all of the tokenType logic go in a separate class?
-	// NOT COMPLETE
-	
-	/*
-	 * By end of function, tokenType, length, and lexeme should be defined and set for the Token object
-	 * 
-	 * To be handled: 
-	 * Letters (variables, reserved words) 
-	 * Brackets 
-	 * Parenthesis 
-	 * #(include statements), 
-	 * <, >, =, -, +, *, /, 
-	 * comments, 
-	 * whitespace
-	 * 
-	 * 
-	 * */
-	public void determineToken(String restOfLine, int curr)
-	{
-		int count = 0;
-		
-		if(restOfLine.length() >= 3) {
-			for (int i = 0; i<threeLetterTokenStrings.length; i++)
-			{
-				if(restOfLine.substring(curr, curr+3).equals(threeLetterTokenStrings[i]))
-				{
-					this.setTokenAttributes(tokenNames[threeLetterTokenNameIndexes[count]], threeLetterTokenStrings[count], 3);
-					return;
-				}
-				count++;	
-			}
-		}
-		
-		
-		count = 0;
-		
-		if(restOfLine.length() >= 2) {
-			for (int j = 0; j<twoLetterTokenStrings.length; j++)
-			{
-				
-				if(restOfLine.substring(curr, curr+2).equals(twoLetterTokenStrings[j]))
-				{
-					this.setTokenAttributes(tokenNames[twoLetterTokenNameIndexes[count]], twoLetterTokenStrings[count], 2);
-					return;
-				}
-				count++;
-			}
-		}
-		
-		count = 0;
-		
-		if(restOfLine.length() >= 1) {
-			for (int k = 0; k<tokenChars.length;k++)
-			{
-				if(restOfLine.charAt(curr) == tokenChars[k])
-				{
-					this.setTokenAttributes(tokenNames[oneLetterTokenNameIndexes[count]], Character.toString(tokenChars[count]), 1);
-					return;
-				}
-				count++;
-			}
-		}
-		
-	}
-	
+	// Still need to spilt up preprocessors
 	public void determineTokenAttributes(String restOfLine) {
 			int curr = 0;
 			
-			// skip whitespace, to next Token
 			
 			if(Character.isLetter(restOfLine.charAt(curr))) {
 				String lexeme = "";
@@ -183,7 +78,7 @@ public class Token {
 				this.setTokenAttributes("string", lexeme, lexeme.length());
 			}
 			else {
-				determineToken(restOfLine, curr);
+				determineOperator(restOfLine, curr);
 			}
 			// to-do:
 			// *,/,comma,semicolon,[,],<,>,!,dot,&,|,?,^,%, numeric literals
@@ -191,6 +86,57 @@ public class Token {
 			// ^^ handling for operators listed in here
 			
 	}
+	
+	// Might change name to determineOperator
+	public void determineOperator(String restOfLine, int curr)
+	{
+		int count = 0;
+		
+		if(restOfLine.length() >= 3) {
+			for (int i = 0; i<threeLetterTokenStrings.length; i++)
+			{
+				if(restOfLine.substring(curr, curr+3).equals(threeLetterTokenStrings[i]))
+				{
+					this.setTokenAttributes(tokenNames[threeLetterTokenNameIndexes[count]], threeLetterTokenStrings[count], 3);
+					return;
+				}
+				count++;	
+			}
+		}
+		
+		
+		count = 0;
+		
+		if(restOfLine.length() >= 2) {
+			for (int j = 0; j<twoLetterTokenStrings.length; j++)
+			{
+				
+				if(restOfLine.substring(curr, curr+2).equals(twoLetterTokenStrings[j]))
+				{
+					this.setTokenAttributes(tokenNames[twoLetterTokenNameIndexes[count]], twoLetterTokenStrings[count], 2);
+					return;
+				}
+				count++;
+			}
+		}
+		
+		count = 0;
+		
+		if(restOfLine.length() >= 1) {
+			for (int k = 0; k<tokenChars.length;k++)
+			{
+				if(restOfLine.charAt(curr) == tokenChars[k])
+				{
+					this.setTokenAttributes(tokenNames[oneLetterTokenNameIndexes[count]], Character.toString(tokenChars[count]), 1);
+					return;
+				}
+				count++;
+			}
+		}
+		
+	}
+	
+	// ----- Set Token Attributes
 	
 	public void setTokenAttributes(String type, String lex, int len) {
 		this.tokenType = type;
@@ -230,6 +176,37 @@ public class Token {
 		return b;
 	}
 	
+	// ----- Getters
+	
+	public String getTokenType() {
+		return this.tokenType;
+	}
+	
+	public String getLexeme() {
+		return this.lexeme;
+	}
+	
+	public int getLength() {
+		return this.length;
+	}
+	
+	public int getColumn() {
+		return this.column;
+	}
+	
+	public int getLineNum() {
+		return this.line;
+	}
+	
+	// ---- Private Data members
+	
+	private String lexeme;
+	private String tokenType;
+	private int line;
+	private int column;
+	private int length;
+	
+	// ----- Arrays of TokenTypes and respective lexemes
 	
 	private String[] keywords  = {
 			"alignas", "alignof", "and",

@@ -8,15 +8,16 @@ public class CPPSourceFile {
 	public CPPSourceFile(String cppFile) {
 		File theFile = new File(cppFile);
 		this.filePath = theFile;
-		
-		// this.fileTokens = tokenize(); once tokenize is functional
-		
 		// probably shouldn't make these variables of CPPSourceFile
 		// as it's only used to iterate through in tokenize(), need to refactor
-		this.lineNum = 1;
+		this.lineNum = 0;
 		this.colNum = 0;
+		
+		this.fileTokens = this.tokenize(); // once tokenize is functional
 	}
 
+	
+	// ----- Tokenizing
 	
 	// loop through all of the input in the file
 	public TokenSequence tokenize() {
@@ -36,19 +37,12 @@ public class CPPSourceFile {
 		return tSequence;
 	}
 	
-	public File getFile() {
-		return this.filePath;
-	}
-	
-	public TokenSequence getTokenSequence() {
-		return this.fileTokens;
-	}
-	
 	// way to iterate through each line in the file used in a loop in tokenize
 	public void getNextLine(int lineNum, Scanner sc, TokenSequence tS) {
 		
 		String line = sc.nextLine();
 		this.colNum = 0;
+		this.lineNum++;
 		while(this.colNum < line.length()) {
 			if(Character.isWhitespace(line.charAt(colNum))) {
 				this.colNum++;
@@ -60,13 +54,24 @@ public class CPPSourceFile {
 				this.colNum = 0;
 				// logic for if a comment ends with code  remaining on the line to be implemented
 			} else {
-				Token nextToken = getNextToken(line, lineNum);
+				Token nextToken = getNextToken(line, lineNum, this.colNum);
 				tS.pushToSequence(nextToken);
 			}
 			
 		}
 		
-		this.lineNum++;
+		
+	}
+	
+	// iterate through all the tokens in a line
+	public Token getNextToken(String line, int lineNum, int colNum) {
+		Token newToken = new Token(lineNum, colNum);
+		
+		String restOfLine = line.substring(colNum, line.length());
+		newToken.determineTokenAttributes(restOfLine);
+		this.colNum += newToken.getLength();
+
+		return newToken;
 	}
 	
 	public boolean checkForComment(String line, int colNum) {
@@ -116,22 +121,26 @@ public class CPPSourceFile {
 		}
 	}
 	
+	// ----- Getters
+	
+	public File getFile() {
+		return this.filePath;
+	}
+	
+	public TokenSequence getTokenSequence() {
+		return this.fileTokens;
+	}
+	
 	public int getLineNum() {
 		return this.lineNum;
 	}
-
-
-	// iterate through all the tokens in a line
-	public Token getNextToken(String line, int lineNum) {
-		Token newToken = new Token(lineNum, this.colNum);
-		
-		String restOfLine = line.substring(this.colNum, line.length());
-		newToken.determineTokenAttributes(restOfLine);
-		this.colNum += newToken.getLength();
-
-		return newToken;
+	
+	public int getColumnNum() {
+		return this.colNum;
 	}
-
+	
+	// ----- Private Data Members
+	
 	private File filePath; // filePath of C++ file File getAbsolutePath()
 	private TokenSequence fileTokens; // TokenSequence output of the entire C++ file after tokenize() has executed
 	private int lineNum;

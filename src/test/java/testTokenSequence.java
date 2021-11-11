@@ -1,25 +1,38 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.Matchers.*;
 
 public class testTokenSequence {
 	
-	@Test
-	public void testTokenize()
+	@Test 
+	public void testConstructor()
 	{
+		CPPSourceFile file = new CPPSourceFile("src/main/resources/helloworld.cpp");
+		TokenSequence tSeq = new TokenSequence(file);
 		
+		assertEquals(tSeq.getSourceFile(), file);
+		assertTrue(tSeq.getSequence().isEmpty());
+		assertEquals(tSeq.getNumTokens(), 0);
+		
+		tSeq.pushToSequence(new Token("var", 5, 4));
+		assertFalse(tSeq.getSequence().isEmpty());
 	}
 	
 	@Test 
-	public void testTokenSeqence()
-	{
+	public void testPushToSequence() {
+		TokenSequence tSeq = new TokenSequence();
+		Token aToken = new Token("int", 3, 6);
 		
-	}
-	
-	@Test
-	public void testCountTokens()
-	{
+		tSeq.pushToSequence(aToken);
+		
+		assertFalse(tSeq.getSequence().isEmpty());
+		assertTrue(tSeq.getSequence().contains(aToken));
+		assertEquals(tSeq.getNumTokens(), 1);
+		assertEquals(tSeq.getToken(0), aToken);
 		
 	}
 	

@@ -6,18 +6,17 @@ import static org.hamcrest.Matchers.*;
 public class testToken
 {
 	@Test
-	public void testDetermineToken()
+	public void testDetermineOperator()
 	{
 		Token a = new Token(0, 0);
 		String restOfLine = "== integer";
 		int curr = 0;
-		a.determineToken(restOfLine, curr);
+		a.determineOperator(restOfLine, curr);
 		assertFalse(a.getLexeme().isEmpty());
 		assertFalse(a.getTokenType().isEmpty());
 		assertTrue(a.getLexeme().equals("=="));
 		assertTrue(a.getTokenType().equals("check-equal-op"));
 		assertThat(a.getLength(), is(2));
-		
 		
 	}
 	
@@ -58,7 +57,16 @@ public class testToken
 	@Test
 	public void testSetTokenAttributes()
 	{
+		Token a = new Token(0, 0);
+		a.setTokenAttributes("numeric-literal", "95", 2);
+		assertEquals(a.getTokenType(), "numeric-literal");
+		assertEquals(a.getLexeme(), "95");
+		assertEquals(a.getLength(), 2);
 		
+		a.setTokenAttributes("right-paren-op", ")", 1);
+		assertEquals(a.getTokenType(), "right-paren-op");
+		assertEquals(a.getLexeme(), ")");
+		assertEquals(a.getLength(), 1);
 	}
 	
 
