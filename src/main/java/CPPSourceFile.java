@@ -116,7 +116,7 @@ public class CPPSourceFile {
 		}
 	}
 	
-	public int getNumLines() {
+	public int getLineNum() {
 		return this.lineNum;
 	}
 
@@ -127,7 +127,6 @@ public class CPPSourceFile {
 		
 		String restOfLine = line.substring(this.colNum, line.length());
 		newToken.determineTokenAttributes(restOfLine);
-		// newToken.setLocation(int lineNum, int colNum, File srcFile); -- to be impl.
 		this.colNum += newToken.getLength();
 
 		return newToken;

@@ -37,6 +37,14 @@ public class Token {
 		return this.length;
 	}
 	
+	public int getColumn() {
+		return this.column;
+	}
+	
+	public int getLineNum() {
+		return this.line;
+	}
+	
 	
 	/*
 	 * Need boolean checks for if first character of the lexeme is:

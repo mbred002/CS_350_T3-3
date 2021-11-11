@@ -24,34 +24,11 @@ public static void main(String[] args) {
 		System.out.print(cppFile.getFile() + ",\n");
 		tSequence.outputAllTokens();
 		System.out.println("Number of tokens: " + tSequence.getNumTokens());
-		System.out.println("Number of lines: " + cppFile.getNumLines());
+		System.out.println("Number of lines: " + cppFile.getLineNum());
 
 		//Output the size of the sequence vector?
 		//TokenSequence test = new TokenSequence();
 		//System.out.print(test.sequence.size());
-
-		/*
-		Token a = new Token(0, 0);
-		String restOfLine = "== integer";
-		System.out.println(restOfLine.substring(0, 2));
-		int curr = 0;
-		a.determineToken(restOfLine, curr);
-		System.out.println(a.getLexeme());
-		System.out.println(a.getLength());
-		System.out.println(a.getTokenType());
-		
-		
-		// just debugging here, outputting the input file
-		try {
-			Scanner fileScanner = new Scanner(cppFile.getFile());
-			while(fileScanner.hasNextLine()) {
-				System.out.println(fileScanner.nextLine());
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
 		
 	}
 }

@@ -31,6 +31,8 @@ public class testToken
 		assertEquals(b.getLexeme(), "\"This is a string\"");
 		assertEquals(b.getTokenType(), "string");
 		assertEquals(b.getLength(), 18);
+		assertEquals(b.getLineNum(), 10);
+		assertEquals(b.getColumn(), 5);
 		
 		// Identifier and reserved word handling
 		String reserved = "for(int i =";
@@ -39,6 +41,8 @@ public class testToken
 		assertEquals(c.getLexeme(), "for");
 		assertEquals(c.getTokenType(), "Reserved keyword");
 		assertEquals(c.getLength(), 3);
+		assertEquals(c.getLineNum(), 2);
+		assertEquals(c.getColumn(), 3);
 		
 		String identifier = "std::getline(std::cin, name);";
 		Token d = new Token(3, 4);
@@ -46,6 +50,8 @@ public class testToken
 		assertEquals(d.getLexeme(), "std::getline");
 		assertEquals(d.getTokenType(), "Identifier");
 		assertEquals(d.getLength(), 12);
+		assertEquals(d.getLineNum(), 3);
+		assertEquals(d.getColumn(), 4);
 		
 	}
 	
