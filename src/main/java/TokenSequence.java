@@ -31,8 +31,15 @@ public class TokenSequence {
 	public boolean isEqual (TokenSequence a) {
 		boolean b = true;
 		//or less than minSequenceLength
+		if (this.sequence.size() > minSequenceLength || a.getNumTokens() > minSequenceLength)
+		{
+			b = false;
+			return b;
+		}
+		
 		if (this.sequence.size() != a.getNumTokens()) {
 			b = false;
+			return b;
 		}
 		else {
 			for (int i = 0; i < this.sequence.size(); i++) {
@@ -41,7 +48,7 @@ public class TokenSequence {
 				}
 				else {
 					b = false;
-					break;
+					return b;
 				}
 			}	
 		}
@@ -95,4 +102,5 @@ public class TokenSequence {
 	Vector<Token> sequence;
 	CPPSourceFile sourceFile;
 	int numTokens;
+	public static int minSequenceLength;
 }

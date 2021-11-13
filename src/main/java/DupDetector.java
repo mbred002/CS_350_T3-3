@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class DupDetector {
 public static void main(String[] args) throws FileNotFoundException {
+	
 		if(args.length != 1 && args.length != 2) {
 			System.err.println("Usage: java DupDetector inputFileName, optional additional outputFileName arg");
 			System.exit(-1);
@@ -16,6 +17,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		 * */
 		
 		CPPSourceFile cppFile = new CPPSourceFile(args[0]);
+		CPPSourceFile cppFile2 = new CPPSourceFile(args[0]);
 		
 		if(args.length == 2) {
 			String outputFile = args[1];
@@ -31,6 +33,10 @@ public static void main(String[] args) throws FileNotFoundException {
 		System.out.println("Number of tokens: " + cppFile.getTokenSequence().getNumTokens());
 		System.out.println("Number of lines: " + cppFile.getLineNum());
 		cppFile.getTokenSequence().outputAllTokens();
+		if(cppFile.getTokenSequence().isEqual(cppFile2.getTokenSequence()))
+			System.out.println("The two files are Equal");
+		else
+			System.out.println("The two files are not Equal");
 		
 		
 		/*

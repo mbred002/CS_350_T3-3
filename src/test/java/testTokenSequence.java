@@ -119,8 +119,7 @@ public class testTokenSequence {
 
 	ts2.outputAllTokens();
 	try {
-	BufferedReader br;
-	br = new BufferedReader (new FileReader("numTokens.txt"));
+	BufferedReader br = new BufferedReader (new FileReader("numTokens.txt"));
 	line = br.readLine();
 	}catch (IOException e){
 	e.printStackTrace();
