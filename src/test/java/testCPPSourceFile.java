@@ -9,6 +9,12 @@ import static org.hamcrest.Matchers.*;
 
 public class testCPPSourceFile {
 //Ill take care of these three -shayla 
+	@Test 
+	public void testCPPSourceFile()
+	{
+	//constructor 	
+		
+	}
 	@Test
 	public void testTokenize()
 	{
