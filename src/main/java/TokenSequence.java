@@ -1,5 +1,7 @@
 import java.util.Vector;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class TokenSequence {
 	
@@ -51,8 +53,24 @@ public class TokenSequence {
 	public void outputAllTokens() {
 		for(int i = 0; i < this.sequence.size(); i++) {
 			System.out.println(sequence.get(i).getLexeme());
+		
+		}
+		
+	}
+	
+	void outputNumTokens(){
+	try {
+	File numTokens = new File("numTokens.txt");
+	FileWriter myWriter = new FileWriter("numTokens.txt");
+	myWriter.write("The total number of tokens in the file is: " + this.getNumTokens());
+	myWriter.close();
+		}
+	catch (IOException e){
+	System.out.println("An error occured.");
+	e.printStackTrace();
 		}
 	}
+
 	
 	// ----- Getters
 	

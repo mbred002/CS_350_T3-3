@@ -30,7 +30,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		cppFile.getTokenSequence().outputAllTokens();
 		System.out.println("Number of tokens: " + cppFile.getTokenSequence().getNumTokens());
 		System.out.println("Number of lines: " + cppFile.getLineNum());
-		
+		cppFile.getTokenSequence().outputAllTokens();
 		
 		
 		/*

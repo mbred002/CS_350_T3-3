@@ -2,6 +2,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader; 
 
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.Matchers.*;
@@ -79,6 +82,54 @@ public class testTokenSequence {
 		assertTrue(seq1.isEqual(seq2));
 		assertFalse(seq1.isEqual(seq3));
 		assertFalse(seq2.isEqual(seq3));
+	}
+
+	@Test
+	public void testOutputNumTokens()
+	{
+	TokenSequence ts = new TokenSequence();
+	Token a = new Token(1,0);
+	Token b = new Token(1,2);
+	Token c = new Token(1,4);
+
+	ts.pushToSequence(a);
+	ts.pushToSequence(b);
+	ts.pushToSequence(c);
+
+	ts.outputAllTokens();
+
+	String line = "";
+	String three = "3";
+	String two = "2";
+
+	try {
+
+	BufferedReader br = new BufferedReader (new FileReader("numTokens.txt"));
+	line = br.readLine();
+	}catch (IOException e){
+	e.printStackTrace();
+	}
+
+	assertTrue(line.contains(three));
+
+	line = "";
+	TokenSequence ts2 = new TokenSequence();
+	ts2.pushToSequence(a);
+	ts2.pushToSequence(b);
+
+	ts2.outputAllTokens();
+	try {
+	BufferedReader br;
+	br = new BufferedReader (new FileReader("numTokens.txt"));
+	line = br.readLine();
+	}catch (IOException e){
+	e.printStackTrace();
+	}
+
+	assertFalse(line.contains(three));
+	assertTrue(line.contains(two));
+
+
 	}
 	
 }
