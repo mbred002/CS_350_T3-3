@@ -37,7 +37,7 @@ public class TokenSequence {
 			return b;
 		}
 		
-		if (this.sequence.size() != a.getNumTokens()) {
+		if (this.sequence.size() != a.getSequence().size()) {
 			b = false;
 			return b;
 		}
@@ -102,5 +102,5 @@ public class TokenSequence {
 	Vector<Token> sequence;
 	CPPSourceFile sourceFile;
 	int numTokens;
-	public static int minSequenceLength;
+	public static int minSequenceLength = 400;
 }
