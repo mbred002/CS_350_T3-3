@@ -11,9 +11,9 @@ public class testCPPSourceFile {
 	@Test 
 	public void testCPPSourceFile()
 	{	
-		CPPSourceFile testFilFe = new CPPSourceFile("src/main/resources/helloworld.cpp");
-		assertTrue(testFilFe.getLineNum()==0);
-		assertTrue(testFilFe.getColumnNum()==0);
+		CPPSourceFile testFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
+		assertTrue(testFile.getLineNum()==0);
+		assertTrue(testFile.getColumnNum()==0);
 	}
 	@Test
 	public void testTokenize()
@@ -36,12 +36,12 @@ public class testCPPSourceFile {
 	@Test
 	public void testGetNextToken()
 	{
-		CPPSourceFile testFilFe = new CPPSourceFile("src/main/resources/helloworld.cpp");
+		CPPSourceFile testFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
 		try {
-			Scanner scan = new Scanner(testFilFe.getFile());
+			Scanner scan = new Scanner(testFile.getFile());
 			String testStr = scan.nextLine();
 
-			Token nextToken = testFilFe.getNextToken(testStr, 1, 0);
+			Token nextToken = testFile.getNextToken(testStr, 1, 0);
 			
 			assertTrue(nextToken.getLexeme().equals("#include<iostream>"));
 			assertTrue(nextToken.getTokenType().equals("preprocessor-op"));
