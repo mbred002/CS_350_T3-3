@@ -65,18 +65,7 @@ public class TokenSequence {
 		
 	}
 	
-	void outputNumTokens(){
-	try {
-	File numTokens = new File("numTokens.txt");
-	FileWriter myWriter = new FileWriter("numTokens.txt");
-	myWriter.write("The total number of tokens in the file is: " + this.getNumTokens());
-	myWriter.close();
-		}
-	catch (IOException e){
-	System.out.println("An error occured.");
-	e.printStackTrace();
-		}
-	}
+	
 
 	
 	// ----- Getters
