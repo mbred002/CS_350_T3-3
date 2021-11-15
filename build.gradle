@@ -2,6 +2,7 @@ plugins {
    id 'java'
    id 'application'
    id 'eclipse'
+   id "org.xbib.gradle.plugin.git" version "2.0.0"
 }
 
 mainClassName = 'DupDetector'
@@ -26,4 +27,59 @@ test {
     testLogging {
         events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
     }
+}
+
+task reports (dependsOn: ['test', 'javadoc']) 
+
+ 
+task clone (dependsOn: ['reports']) {  
+doLast {
+        mkdir 'build/gh-pages'
+        def thisRepo = rootProject.projectDir.toString()
+        def reportsDir = "$buildDir/gh-pages"
+         project.delete {
+            delete reportsDir
+        }
+        
+
+        def grgit = git.clone {
+            
+            dir = reportsDir
+            //uri = 'file:' + thisRepo
+            uri = thisRepo
+            bare = false
+            refToCheckout = 'gh-pages'
+        }
+        grgit.checkout {
+            branch = 'gh-pages'
+        }          
+    }
+}
+
+task copyReports (type: Copy, dependsOn: ['clone']) {
+    
+    from "$buildDir/reports"
+    //into "$buildDir/gh-pages/reports"
+    from "$buildDir/docs/javadoc"
+    into "$buildDir/gh-pages/docs/javadoc"
+}
+
+
+
+task update (dependsOn: ['copyReports']) {
+ doLast {
+        def pagesDir = "$buildDir/gh-pages"
+        def grgit2 = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit2.add (update: false, patterns: ['reports/'])
+        grgit2.add (update: true, patterns: ['reports/'])
+        grgit2.add (update: false, patterns: ['docs/'])
+        grgit2.add (update: true, patterns: ['docs/'])
+
+        grgit2.commit {
+            message = "Update Web Pages"
+        }
+        grgit2.push {}
+    } 
 }
