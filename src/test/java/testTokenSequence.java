@@ -85,50 +85,20 @@ public class testTokenSequence {
 	}
 
 	@Test
-	public void testOutputNumTokens()
+	public void testGetNumTokens ()
 	{
-	TokenSequence ts = new TokenSequence();
-	Token a = new Token(1,0);
-	Token b = new Token(1,2);
-	Token c = new Token(1,4);
-
-	ts.pushToSequence(a);
-	ts.pushToSequence(b);
-	ts.pushToSequence(c);
-
-	ts.outputAllTokens();
-
-	String line = "";
-	String three = "3";
-	String two = "2";
-
-	try {
-
-	BufferedReader br = new BufferedReader (new FileReader("numTokens.txt"));
-	line = br.readLine();
-	}catch (IOException e){
-	e.printStackTrace();
+		TokenSequence seq = new TokenSequence();
+		Token a = new Token(1,0);
+		Token b = new Token(1,3);
+		Token c = new Token(1,6);
+		
+		seq.pushToSequence(a);
+		seq.pushToSequence(b);
+		seq.pushToSequence(c);
+		
+		assertThat(seq.getNumTokens(), is (3));
 	}
+	
 
-	assertTrue(line.contains(three));
-
-	line = "";
-	TokenSequence ts2 = new TokenSequence();
-	ts2.pushToSequence(a);
-	ts2.pushToSequence(b);
-
-	ts2.outputAllTokens();
-	try {
-	BufferedReader br = new BufferedReader (new FileReader("numTokens.txt"));
-	line = br.readLine();
-	}catch (IOException e){
-	e.printStackTrace();
-	}
-
-	assertFalse(line.contains(three));
-	assertTrue(line.contains(two));
-
-
-	}
 	
 }
