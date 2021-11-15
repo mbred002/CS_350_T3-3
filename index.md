@@ -3,5 +3,5 @@
 Project Team T3- 3
  
 
-* [Tests](./reports/tests/test/)
+* [Tests](./docs/javadoc/tests/test/)
 * [JavaDoc](./docs/javadoc/)
