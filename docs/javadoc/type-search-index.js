@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"CPPSourceFile"},{"p":"<Unnamed>","l":"DupDetector"},{"p":"<Unnamed>","l":"Token"},{"p":"<Unnamed>","l":"TokenSequence"}];updateSearchResults();
