@@ -5,6 +5,12 @@ import java.util.Scanner;
 
 public class CPPSourceFile {
 	
+	public CPPSourceFile() {
+		this.filePath = new File("src/main/resources/helloworld.cpp");
+		this.lineNum = 0;
+		this.colNum = 0;
+	}
+	
 	public CPPSourceFile(String cppFile) {
 		File theFile = new File(cppFile);
 		this.filePath = theFile;
@@ -22,6 +28,8 @@ public class CPPSourceFile {
 	// loop through all of the input in the file
 	public TokenSequence tokenize() {
 		TokenSequence tSequence = new TokenSequence(this);
+		this.lineNum = 0;
+		this.colNum = 0;
 		try {
 			Scanner sc = new Scanner(filePath);
 			// while file has another line, continue
@@ -42,6 +50,7 @@ public class CPPSourceFile {
 		
 		String line = sc.nextLine();
 		this.colNum = 0;
+		this.lineNum = lineNum;
 		this.lineNum++;
 		while(this.colNum < line.length()) {
 			if(Character.isWhitespace(line.charAt(colNum))) {
