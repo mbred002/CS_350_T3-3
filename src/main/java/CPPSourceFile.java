@@ -7,29 +7,49 @@ public class CPPSourceFile {
 	
 	public CPPSourceFile() {
 		this.filePath = new File("src/main/resources/helloworld.cpp");
+		this.filePath2 = new File("src/main/resources/test.cpp");
 		this.lineNum = 0;
 		this.colNum = 0;
 	}
 	
 	public CPPSourceFile(String cppFile) {
 		File theFile = new File(cppFile);
+		
+		
 		this.filePath = theFile;
 		// probably shouldn't make these variables of CPPSourceFile
 		// as it's only used to iterate through in tokenize(), need to refactor
 		this.lineNum = 0;
 		this.colNum = 0;
 		
-		this.fileTokens = this.tokenize(); // once tokenize is functional
+		this.fileTokens = this.tokenize(filePath); // once tokenize is functional
+	}
+	
+	public CPPSourceFile(String cppFile, String cppFile2) {
+		File theFile = new File(cppFile);
+		File theFile2 = new File(cppFile2);
+		
+		this.filePath = theFile;
+		this.filePath2 = theFile2;
+		// probably shouldn't make these variables of CPPSourceFile
+		// as it's only used to iterate through in tokenize(), need to refactor
+		this.lineNum = 0;
+		this.colNum = 0;
+		
+		this.fileTokens = this.tokenize(filePath);
+		this.fileTokens2 = this.tokenize(filePath2); // once tokenize is functional
 	}
 
 	
 	// ----- Tokenizing
 	
 	// loop through all of the input in the file
-	public TokenSequence tokenize() {
+	public TokenSequence tokenize(File filePath) {
 		TokenSequence tSequence = new TokenSequence(this);
+		
 		this.lineNum = 0;
 		this.colNum = 0;
+		
 		try {
 			Scanner sc = new Scanner(filePath);
 			// while file has another line, continue
@@ -40,6 +60,7 @@ public class CPPSourceFile {
 			// mandatory error handling
 			e.printStackTrace();
 		}
+		
 	
 		
 		return tSequence;
@@ -136,8 +157,16 @@ public class CPPSourceFile {
 		return this.filePath;
 	}
 	
+	public File getFile2() {
+		return this.filePath2;
+	}
+	
+	
 	public TokenSequence getTokenSequence() {
 		return this.fileTokens;
+	}
+	public TokenSequence getTokenSequence2() {
+		return this.fileTokens2;
 	}
 	
 	public int getLineNum() {
@@ -151,7 +180,9 @@ public class CPPSourceFile {
 	// ----- Private Data Members
 	
 	private File filePath; // filePath of C++ file File getAbsolutePath()
+	private File filePath2;
 	private TokenSequence fileTokens; // TokenSequence output of the entire C++ file after tokenize() has executed
+	private TokenSequence fileTokens2;
 	private int lineNum;
 	private int colNum;
 }

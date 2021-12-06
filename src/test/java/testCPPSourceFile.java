@@ -13,17 +13,24 @@ public class testCPPSourceFile {
 	public void testCPPSourceFile()
 	{	
 		CPPSourceFile testFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
+		CPPSourceFile testFile2 = new CPPSourceFile("src/main/resources/helloworld.cpp","src/main/resources/test.cpp");
+		
 		assertTrue(testFile.getLineNum()==17);
 		assertTrue(testFile.getColumnNum()==1); // end of file is bracket on line 17. Should be end due to tokenize() executing
+		
+		assertTrue(testFile2.getLineNum()==202);
+		assertTrue(testFile2.getColumnNum()==1);
 		// handling for both Windows and linux machines in path check
 		assertThat(testFile.getFile().getPath(), Matchers.anyOf(Matchers.is("src/main/resources/helloworld.cpp"), Matchers.is("src\\main\\resources\\helloworld.cpp")));
 		
+		assertThat(testFile2.getFile().getPath(), Matchers.anyOf(Matchers.is("src/main/resources/helloworld.cpp"), Matchers.is("src\\main\\resources\\helloworld.cpp")));
+		assertThat(testFile2.getFile2().getPath(), Matchers.anyOf(Matchers.is("src/main/resources/test.cpp"), Matchers.is("src\\main\\resources\\test.cpp")));
 	}
 	@Test
 	public void testTokenize()
 	{
 		CPPSourceFile testFile = new CPPSourceFile("src/main/resources/helloworld.cpp");
-		testFile.tokenize();
+		testFile.tokenize(testFile.getFile());
 		assertTrue(testFile.getLineNum()==17);
 		assertEquals(testFile.getTokenSequence().getNumTokens(), 15);
 		assertEquals(testFile.getTokenSequence().getToken(0).getLexeme(), "#include<iostream>");

@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class DupDetector {
 public static void main(String[] args) throws FileNotFoundException {
 	
-		if(args.length != 1 && args.length != 2) {
-			System.err.println("Usage: java DupDetector inputFileName, optional additional outputFileName arg");
+		if(args.length != 1 && args.length != 2 && args.length != 3) {
+			System.err.println("Usage: java DupDetector inputFileName, inputFileName2 (optional) , optional additional outputFileName arg");
 			System.exit(-1);
 		}
 		
@@ -15,11 +15,21 @@ public static void main(String[] args) throws FileNotFoundException {
 		 * ./gradlew build
 		 * ./gradlew run --args "inputFile", or .\gradlew run --args "inputFile outputFile"
 		 * */
+		boolean twofiles;
+		CPPSourceFile cppFile;
+		if (args.length == 2)
+		{
+			cppFile = new CPPSourceFile(args[0], args[1]);
+			twofiles =true;
+		}
+		else
+		{
+			cppFile = new CPPSourceFile(args[0]);
+			twofiles = false;
+		}
 		
-		CPPSourceFile cppFile = new CPPSourceFile(args[0]);
-		CPPSourceFile cppFile2 = new CPPSourceFile(args[0]);
 		
-		if(args.length == 2) {
+		if(args.length == 3) {
 			String outputFile = args[1];
 			System.out.println("Output sent to " + outputFile);
 			PrintStream output = new PrintStream(new FileOutputStream(outputFile));
@@ -32,11 +42,16 @@ public static void main(String[] args) throws FileNotFoundException {
 		cppFile.getTokenSequence().outputAllTokens();
 		System.out.println("Number of tokens: " + cppFile.getTokenSequence().getNumTokens());
 		System.out.println("Number of lines: " + cppFile.getLineNum());
-		cppFile.getTokenSequence().outputAllTokens();
-		if(cppFile.getTokenSequence().isEqual(cppFile2.getTokenSequence()))
-			System.out.println("The two files are Equal");
-		else
-			System.out.println("The two files are not Equal");
+		cppFile.getTokenSequence2().outputAllTokens();
+		
+		if (twofiles == true)
+		{
+			if(cppFile.getTokenSequence().isEqual(cppFile.getTokenSequence2()))
+				System.out.println("The two files are Equal");
+			else
+				System.out.println("The two files are not Equal");
+		}
+		
 		
 		
 		/*
